@@ -78,6 +78,7 @@ public class AsyncTaskActivity extends AppCompatActivity {
 
         if (asyncTask != null) {
             asyncTask.cancel(true);
+            asyncTask = null;
         }
     }
 

@@ -66,6 +66,7 @@ public class NewThreadActivity extends AppCompatActivity {
 
         if (thread != null) {
             thread.interrupt();
+            thread = null;
         }
     }
 

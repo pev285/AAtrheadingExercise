@@ -50,6 +50,8 @@ public class HandlerThreadActivity extends AppCompatActivity {
         super.onDestroy();
 
         handlerThread.quit();
+        handler = null;
+        handlerThread = null;
     }
 
     private void initializeViews() {

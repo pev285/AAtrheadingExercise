@@ -66,6 +66,7 @@ public class AsynctaskImitationUsingThreadActivity extends AppCompatActivity {
         super.onDestroy();
         if (asyncTask != null) {
             asyncTask.cancel();
+            asyncTask = null;
         }
     }
 
