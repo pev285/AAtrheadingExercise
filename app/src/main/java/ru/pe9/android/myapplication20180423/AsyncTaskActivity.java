@@ -30,16 +30,18 @@ public class AsyncTaskActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
 
-        try {
-            String val = resultsTextView.getText().toString();
+        if(asyncTask != null && asyncTask.getStatus() == AsyncTask.Status.RUNNING) {
+            try {
+                String val = resultsTextView.getText().toString();
 
-            int intVal = Integer.parseInt(val);
+                int intVal = Integer.parseInt(val);
 
-            savedInstanceState.putInt(LAST_VALUE_KEY, intVal);
+                savedInstanceState.putInt(LAST_VALUE_KEY, intVal);
 
-        }
-        catch (NumberFormatException e) {
+            }
+            catch (NumberFormatException e) {
 
+            }
         }
     }
 

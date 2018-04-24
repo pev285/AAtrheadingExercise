@@ -30,12 +30,14 @@ public class AsynctaskImitationUsingThreadActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        try {
-            String val = resultsTextView.getText().toString();
-            int intVal = Integer.parseInt(val);
-            outState.putInt(LAST_VALUE_KEY, intVal);
+        if (asyncTask != null && asyncTask.getStatus() == AsyncTask.Status.RUNNING) {
+            try {
+                String val = resultsTextView.getText().toString();
+                int intVal = Integer.parseInt(val);
+                outState.putInt(LAST_VALUE_KEY, intVal);
+            }
+            catch (NumberFormatException e) {}
         }
-        catch (NumberFormatException e) {}
     }
 
     @Override
