@@ -19,7 +19,8 @@
         <activity android:name=".NewThreadActivity" />
         <activity android:name=".AsyncTaskActivity" />
         <activity android:name=".HandlerThreadActivity" />
-        <activity android:name=".AsynctaskImitationUsingThreadActivity"></activity>
+        <activity android:name=".AsynctaskImitationUsingThreadActivity" />
+        <activity android:name=".ThreadPoolActivity"></activity>
     </application>
 
 </manifest>

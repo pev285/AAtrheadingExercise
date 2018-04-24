@@ -49,13 +49,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        Button button4 = findViewById(R.id.button4);
-//        button4.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ///////////////////////////////////
-//            }
-//        });
+        Button buttonThreadPool = findViewById(R.id.threadPoolButton);
+        buttonThreadPool.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ThreadPoolActivity.StartThisActivity(v.getContext());
+            }
+        });
     }
 
 } // end of class //
