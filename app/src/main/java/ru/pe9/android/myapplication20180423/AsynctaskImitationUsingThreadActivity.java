@@ -61,6 +61,14 @@ public class AsynctaskImitationUsingThreadActivity extends AppCompatActivity {
 
     } // onCreate() //
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (asyncTask != null) {
+            asyncTask.cancel();
+        }
+    }
+
     private void initializeViews() {
         resultsTextView = findViewById(R.id.resultsTextView);
         statusTextView = findViewById(R.id.statusTextView);
