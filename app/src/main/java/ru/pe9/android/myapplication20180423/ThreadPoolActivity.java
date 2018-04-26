@@ -12,8 +12,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import static java.lang.Thread.sleep;
 
@@ -28,6 +31,8 @@ public class ThreadPoolActivity extends AppCompatActivity {
 
     private static int threadsNumber = 0;
 
+    private List<Future> futuresList = null;
+
 
     public static void StartThisActivity(Context context) {
         Intent intent = new Intent(context, ThreadPoolActivity.class);
@@ -41,6 +46,7 @@ public class ThreadPoolActivity extends AppCompatActivity {
 
 
         uiHandler = new Handler(Looper.getMainLooper());
+        futuresList = new ArrayList<Future>();
 
         initializeViews();
 
@@ -49,6 +55,8 @@ public class ThreadPoolActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        clearFuturesList();
 
         if (executorService != null) {
             executorService.shutdownNow();
@@ -98,10 +106,7 @@ public class ThreadPoolActivity extends AppCompatActivity {
     private void startBackgroundThread() {
         if (executorService != null) {
             Runnable runnable = new Runnable() {
-
                 String threadNum = Integer.toString(threadsNumber++);
-
-
                 @Override
                 public void run() {
 
@@ -133,7 +138,8 @@ public class ThreadPoolActivity extends AppCompatActivity {
                     }
                 }
             };
-            executorService.execute(runnable);
+            Future future = executorService.submit(runnable);
+            futuresList.add(future);
         } else {
             Toast.makeText(this, "Create new executor service", Toast.LENGTH_SHORT).show();
         }
@@ -142,12 +148,25 @@ public class ThreadPoolActivity extends AppCompatActivity {
 
     private void cancelBackgroundThread() {
         if (executorService != null) {
-            executorService.shutdownNow();
-            executorService = null;
+//            executorService.shutdownNow();
+//            executorService = null;
+
+            clearFuturesList();
+
+            Toast.makeText(this, "Tasks cancelled", Toast.LENGTH_SHORT).show();
+
         } else {
             Toast.makeText(this, "Create new executor service", Toast.LENGTH_SHORT).show();
         }
     }
 
 
-}
+    private void clearFuturesList() {
+        for(int i = 0; i < futuresList.size(); i++) {
+            futuresList.get(i).cancel(true);
+        }
+        futuresList.clear();
+    }
+
+} // end of class //
+

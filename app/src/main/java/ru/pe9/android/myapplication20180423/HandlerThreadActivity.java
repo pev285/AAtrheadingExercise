@@ -129,9 +129,10 @@ public class HandlerThreadActivity extends AppCompatActivity {
                 r.interrupt();
                 handler.removeCallbacks(r);
             }
-            //handler.removeCallbacks(null);
 
             threadsList.clear();
+
+            //handler.removeCallbacksAndMessages(null);
 
             statusTextView.setText("Tasks queue is cleared");
         }
